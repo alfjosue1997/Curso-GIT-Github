@@ -86,7 +86,7 @@ touch config
 O en Windows simplemente con click derecho y "Crear Nuevo Documento". Este archivo lo podemos abrir con Bloc de Notas (o equivalentes en Linux), o también con VS Code:
 
 ```bash
-code config
+code .
 ```
 
 y agregamos lo siguiente (en Linux):
@@ -143,9 +143,37 @@ chmod 600 my_key1
 
 Y en Windows, basta con dirigirse a <b>.ssh</b>, dar click derecho al archivo de llave privada, y cambiar los permisos, asegurando que sólo el administrador pueda leer y escribir en él.
 
-## Agregar la llave pública a GitHub
+**RECOMENDACIÓN:** Abrir ventana de GIT bash y ejecutar la siguiente linea. 
+```bash
+chmod 600 my_key1
+```
 
-Ahora, debes abrir tu repositorio de GitHub, o uno perteneciente a alguna organización (ejemplo, LINX) una vez que el dueño de ese repositorio te haya dado los permisos para editarlo. Dentro del repositorio, ve a `Settings`, y luego en el menú del lado izquierdo ve a `Deploy Keys`. Dale a `Add deploy key`, y en el recuadro `Key` pega la clave que aparece dentro del archivo de llave pública `my_key1.pub` (puedes abrir el archivo con el Bloc de Notas, seleccionar todo `Ctrl+A` y luego copiar `Ctrl+C`). Bajo ninguna circunstancia debes pegar la clave privada que aparece en el archivo sin extensión `my_key1`. Finalmente, agrega algún título alusivo en el recuadro `Title` en GitHub, activa los permisos de escritura (Writing Access) en la casilla debajo del cuadro de la clave, y dale a guardar llave.
+## Agregar la llave pública a GitHub
+**[Agregar imagenes de esta sección]**
+Ahora, debes abrir tu repositorio de GitHub, o uno perteneciente a alguna organización (ejemplo, LINX) una vez que el dueño de ese repositorio te haya dado los permisos para editarlo. 
+
+Dentro del repositorio, ve a `Settings`.  
+<img width="320" height="325" alt="image" src="https://github.com/user-attachments/assets/9c6776d9-6e6f-4d60-9938-00a317b7469e" />
+
+
+Luego en el menú del lado izquierdo ve a `Deploy Keys`.  
+<img width="1005" height="131" alt="image" src="https://github.com/user-attachments/assets/92bc9a4f-060f-47b6-9608-6a04593700d3" />
+
+
+Dale a `Add deploy key`,  
+<img width="1005" height="556" alt="image" src="https://github.com/user-attachments/assets/d1d3a026-2091-441f-a7be-c9bcd34cd74e" />  
+
+y en el recuadro `Key` pega la clave que aparece dentro del archivo de llave pública `my_key1.pub` (puedes abrir el archivo con el Bloc de Notas, seleccionar todo `Ctrl+A` y luego copiar `Ctrl+C`) o en visual studio code en el archivo .pub.  
+<img width="1115" height="237" alt="image" src="https://github.com/user-attachments/assets/3d3ad4d3-0ad3-4107-b8ec-4a658cea6eab" />
+
+Bajo ninguna circunstancia debes pegar la clave privada que aparece en el archivo sin extensión `my_key1`. Finalmente, agrega algún título alusivo en el recuadro `Title` en GitHub, activa los permisos de escritura (Writing Access) en la casilla debajo del cuadro de la clave, y dale a guardar llave.  
+
+<img width="999" height="573" alt="image" src="https://github.com/user-attachments/assets/fd146e2f-91b9-4515-95c3-b92728d28201" />
+
+Al agregar la Key saldrá la siguiente ventana.  
+<img width="1355" height="508" alt="image" src="https://github.com/user-attachments/assets/57b9e7f0-351c-417e-b3df-28a4d441c263" />
+
+
 
 ## Inciar sesión con SSH
 
@@ -161,7 +189,12 @@ Y en Windows:
 ssh.exe -T -F "C:\Users\your_user\.ssh\config" git@github-host1
 ```
 
-En donde el parámetro `-T` indica que la conexión se efectúa sin el modo de (pseudo)terminal activado, lo cual es necesario en GitHub ya que no vamos a usar comandos de Bash en el servidor remoto (GitHub); el parámetro `-F ruta/a/config` es opcional y sirve para indicar la ruta del archivo `config`, si se omite toma por defecto la ruta `~/.ssh/config` en Linux nativo (pero parece que en Windows y WSL no, por lo que en Windows sí se debe escribir la ruta del `config`), y finalmente se escribe el nombre de usuario `git` (para hacer push en Git siempre se usa este nombre) seguido de un arroba y el host que especificaste en `config`. Posteriormente el programa te pedirá que ingreses la passphrase con la que creaste la llave asignada al host, y con esto se iniciará sesión.
+En donde el parámetro `-T` indica que la conexión se efectúa sin el modo de (pseudo)terminal activado, lo cual es necesario en GitHub ya que no vamos a usar comandos de Bash en el servidor remoto (GitHub); el parámetro `-F ruta/a/config` es opcional y sirve para indicar la ruta del archivo `config`, si se omite toma por defecto la ruta `~/.ssh/config` en Linux nativo (pero parece que en Windows y WSL no, por lo que en Windows sí se debe escribir la ruta del `config`), y finalmente se escribe el nombre de usuario `git` (para hacer push en Git siempre se usa este nombre) seguido de un arroba y el host que especificaste en `config`.  
+<img width="405" height="156" alt="image" src="https://github.com/user-attachments/assets/758cd7e9-b44e-42b4-8349-c49b06beab3f" />
+
+Posteriormente el programa te pedirá que ingreses la passphrase con la que creaste la llave asignada al host, y con esto se iniciará sesión.
+
+<img width="649" height="160" alt="image" src="https://github.com/user-attachments/assets/18a8a465-c983-41a5-b510-e477c1d191a7" />
 
 ## Conectando más de un usuario por computadora (opcional)
 
@@ -220,7 +253,9 @@ Para cargar un repositorio a GitHub varia un poco si empezaste desde `git init` 
 
 ### Desde `init`
 
-Si comenzaste desde `git init`. Se abre la carpeta oculta `.git` del repositorio local de tu proyecto (esta carpeta se crea automáticamente al ejecutar `git init` o `git clone`), y luego se abre el archivo `config` de ese Git (NO CONFUNFIR con el `config` de <b>.ssh</b>). Ahora, se debe buscar la sección que contiene los datos del repositorio remoto, y edítala para que se vea como sigue:
+Si comenzaste desde `git init`, en GitHub **DEBES CREAR** un repositorio con el nombre de tu nuevo repositorio, de lo contrario git no sabrá adonde mandarlo.
+
+Se abre la carpeta oculta `.git` del repositorio local de tu proyecto (esta carpeta se crea automáticamente al ejecutar `git init` o `git clone`), y luego se abre el archivo `config` de ese Git (NO CONFUNFIR con el `config` de <b>.ssh</b>). Ahora, se debe buscar la sección que contiene los datos del repositorio remoto, y edítala para que se vea como sigue:
 
 ```bash
 [remote "origin"]
@@ -251,8 +286,6 @@ git branch -M main
 ```
 
 Tras esto, cualquier push que se haga mediante Git será enviado a GitHub mediante el host personalizado `github-host1` creado en pasos anteriores, el cual ya tiene asignada la misma llave de acceso que cargaste en el repositorio remoto GitHub con DeployKeys. 
-
-Ahora, en GitHub **DEBES CREAR** un repositorio con el nombre de tu nuevo repositorio, de lo contrario git no sabrá adonde mandarlo.
 
 Ahora, ya se puede ejecutar el primer push, sólo ve a la carpeta del proyecto donde inicializaste Git, abre una terminal ahí mismo y ejecuta (es lo mismo en Windows que en Linux):
 

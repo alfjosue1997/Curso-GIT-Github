@@ -161,7 +161,7 @@ Esta configuración afectará a nivel usuario en la pc en la que nos encontremos
     Vamos a hacer que el editor por defecto sea VSCode:
 
     ```bash  
-    git config --global user.editor code
+    git config --global core.editor code
     ```
     De esta manera se puede entrar al archivo de configuración y editarlo utilizando VSCode, esto es especialmente util si se utiliza WSL. 
 ---
