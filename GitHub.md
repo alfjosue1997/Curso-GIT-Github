@@ -11,12 +11,16 @@
   - [Agregar la llave pública a GitHub](#agregar-la-llave-pública-a-github)
   - [Inciar sesión con SSH](#inciar-sesión-con-ssh)
   - [Conectando más de un usuario por computadora (opcional)](#conectando-más-de-un-usuario-por-computadora-opcional)
-- [Enlace entre repositorios git y GitHub](#enlace-entre-repositorios-git-y-github)
+- [Enlace entre repositorios Git y GitHub](#enlace-entre-repositorios-git-y-github)
   - [Clonar un repositorio remoto](#clonar-un-repositorio-remoto)
   - [Cargar un repositorio remoto](#cargar-un-repositorio-remoto)
     - [Desde `init`](#desde-init)
     - [Desde `clone`](#desde-clone)
-  - [Ramas](#ramas)
+  - [Ramas en Github](#ramas-en-github)
+- [Colaboración entre multiples personas](#colaboración-entre-multiples-personas)
+- [WorkFlow](#workflow)
+- [Fork](#fork)
+  - [Upstream](#upstream)
 
 
 
@@ -170,7 +174,7 @@ ssh -T -F ~/.ssh/config git@github-host2
 Y el programa solicitará al usuario ingresar su passphrase para `my_key2`. En Windows simplemente se agrega la terminación <b>.exe</b> al comando `ssh`, y se usa la ruta `"C:\Users\your_user\.ssh\config"` del `config` en Windows.
 
 
-# Enlace entre repositorios git y GitHub 
+# Enlace entre repositorios Git y GitHub 
 
 ## Clonar un repositorio remoto
 
@@ -227,10 +231,21 @@ Si comenzaste desde `git init`. Se abre la carpeta oculta `.git` del repositorio
 En la línea de `url` se debe cambiar el `github-host1` por el nombre que asignaste a tu Host en SSH, y `your_user/your_repo.git` es el nombre del usuario propietario en GitHub seguido del nombre del repositorio donde estás trabajando. 
 
 Tambien se puede hacer desde la terminal:
+
 ```bash
 git remote add origin github-host1:your_user/your_repo.git
 ```
-opcional: renombrar la rama principal a 'main'
+
+Para comprobar:
+
+```bash
+$ git remote -v
+> origin  git@github-host1:your_user/your_repo.git (fetch)
+> origin  git@github-host1:your_user/your_repo.git (push)
+```
+
+Opcional: Renombrar la rama principal a 'main'
+
 ```bash
 git branch -M main 
 ```
@@ -268,7 +283,7 @@ Si no funciono, probablemente tengas que configurar el repositorio remoto `origi
 git remote set-url origin git@github-host:usuario/nuevo-repo.git
 ```
 
-## Ramas
+## Ramas en Github
 
 Si quieres subir una nueva rama:
 
@@ -290,6 +305,47 @@ Luego, para ver todas las ramas:
 git branch -ar
 ```
 
+# Colaboración entre multiples personas
+
+# WorkFlow
+
+# Fork
 
 
+## Upstream
 
+Debes configurar un remoto que apunte al repositorio ascendente en Git para sincronizar los cambios que realizas en una bifurcación con el repositorio original. Esto también te permite sincronizar los cambios en el repositorio original con la bifurcación.
+
+[Se abre la carpeta oculta `.git`](#desde-init) del repositorio local de tu proyecto (esta carpeta se crea automáticamente al ejecutar `git init` o `git clone`), y luego se abre el archivo `config` de ese Git (NO CONFUNFIR con el `config` de <b>.ssh</b>). Ahora, se debe buscar la sección que contiene los datos del repositorio remoto, y edítala para que se vea como sigue:
+
+```bash
+[remote "origin"]
+	url = git@github-host:colab-username/your_fork.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[remote "upstream"]
+	url = git@github-host:organization/repo.git
+	fetch = +refs/heads/*:refs/remotes/upstream/*
+```
+
+En la línea de `url` se debe cambiar el `github-host` por el nombre que asignaste a tu Host en SSH. Tambien se debe cambiar lo siguiente:
+
+- `colab-username/your_fork.git` nombre del colaborador y el nombre del fork.
+- `organization/repo.git` 
+
+es el nombre del usuario propietario en GitHub seguido del nombre del repositorio donde estás trabajando. 
+
+Tambien se puede hacer desde la terminal:
+```bash
+git remote add origin github-host:your_user/your_fork.git
+git remote add upstream github-host:organization/repo.git
+```
+
+Verifica el nuevo repositorio ascendente que especificaste para tu bifurcación.
+
+```bash
+$ git remote -v
+> origin    github-host:your_user/your_fork.git (fetch)
+> origin    github-host:your_user/your_fork.git (push)
+> upstream  github-host:organization/repo.git (fetch)
+> upstream  github-host:organization/repo.git (push)
+```
