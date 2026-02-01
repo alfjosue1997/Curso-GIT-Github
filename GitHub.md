@@ -4,6 +4,8 @@
 - [INDICE](#indice)
 - [Conexión SSH](#conexión-ssh)
   - [Creando un directorio para SSH](#creando-un-directorio-para-ssh)
+    - [Directorio SSH Linux/WSL](#directorio-ssh-linuxwsl)
+    - [Directorio SSH Windows 10](#directorio-ssh-windows-10)
   - [Creación de la llave RSA](#creación-de-la-llave-rsa)
   - [Configurando el Host](#configurando-el-host)
   - [Conexión de más de un usuario en el mismo equipo (opcional)](#conexión-de-más-de-un-usuario-en-el-mismo-equipo-opcional)
@@ -13,26 +15,32 @@
   - [Conectando más de un usuario por computadora (opcional)](#conectando-más-de-un-usuario-por-computadora-opcional)
 - [Enlace entre repositorios Git y GitHub](#enlace-entre-repositorios-git-y-github)
   - [Clonar un repositorio remoto](#clonar-un-repositorio-remoto)
-  - [Cargar un repositorio remoto](#cargar-un-repositorio-remoto)
+  - [Subir un repositorio remoto](#subir-un-repositorio-remoto)
     - [Desde `init`](#desde-init)
     - [Desde `clone`](#desde-clone)
   - [Ramas en Github](#ramas-en-github)
 - [Colaboración entre multiples personas](#colaboración-entre-multiples-personas)
-- [WorkFlow](#workflow)
-- [Fork](#fork)
+  - [WorkFlow](#workflow)
+  - [Fork](#fork)
   - [Upstream](#upstream)
 
 
 
 # Conexión SSH 
 
-En este punto se recomienda instalar WSL si estás en Windows para ejecutar comandos de Ubuntu en terminal, aunque no es obligatorio. Por tanto, la gran parte de los pasos es la misma en Linux (distribuciones basadas en Debian como Ubuntu o Mint), y Windows con WSL. Si se usa Windows nativo (sin WSL), los siguientes comandos se deberán ejecutar desde Powershell, y comúnmente la diferencia entre un comando en Linux y en Powershell será la terminación <b>.exe</b> de ejecutable (ejemplo, `ssh` en Linux/WSL, y `ssh.exe` en Powershell). En ambos SOs usaremos la terminal, ya sea la de Linux, el WSL, o el Powershell de Windows.
+En este punto se recomienda instalar WSL si estás en Windows para ejecutar comandos de Ubuntu en terminal, aunque no es obligatorio. Por tanto, la gran parte de los pasos es la misma en Linux (distribuciones basadas en Debian como Ubuntu o Mint), y Windows con WSL. 
+
+
+Si se usa Windows nativo los siguientes comandos se deberán ejecutar desde Powershell, y comúnmente la diferencia entre un comando en Linux y en Powershell será la terminación <b>`.exe`</b> de ejecutable (ejemplo, `ssh` en Linux/WSL, y `ssh.exe` en Powershell). En ambos SOs usaremos la terminal, ya sea la de Linux, el WSL, o el Powershell de Windows.
 
 
 
 ## Creando un directorio para SSH
 
-Para conectar el repositorio local con un repositorio de GitHub, usaremos la conexión SSH, para lo cual necesitamos una clave RSA. Primero, en el directorio home de Linux o de WSL del usuario en tu computadora (`~` o `/home/you_user` en Linux, la misma ruta en WSL Windows) crea una nueva carpeta <b>~/.ssh</b>, y abre la terminal dentro de ella. Puedes hacerlo con los siguientes comandos:
+Para conectar el repositorio local con un repositorio de GitHub, usaremos la conexión SSH, para lo cual necesitamos una **clave RSA**. 
+
+### Directorio SSH Linux/WSL
+Primero, en el directorio `home` de Linux o de WSL del usuario en tu computadora (`~` o `/home/you_user` en Linux, la misma ruta en WSL Windows) crea una nueva carpeta <b>~/.ssh</b>, y abre la terminal dentro de ella. Puedes hacerlo con los siguientes comandos:
 
 ```bash
 #Cambiar al home de tu usuario
@@ -42,8 +50,11 @@ mkdir .ssh
 #Entrar al directorio
 cd .ssh
 ```
+Si vas a usar WSL, es importante usar la ruta `~` del WSL en vez de tu carpeta de usuario personal en Windows (comunmente `C:\Users\your_user`) pues sólo puedes gestionar permisos con comandos de Unix dentro de los directorios de WSL, no en los nativos de Windows. 
 
-Si vas a usar WSL, es importante usar la ruta `~` del WSL en vez de tu carpeta de usuario personal en Windows (comunmente `C:\Users\your_user`) pues sólo puedes gestionar permisos con comandos de Unix dentro de los directorios de WSL, no en los nativos de Windows. Por el contrario, si usarás Windows nativamente en vez de WSL, debes ir a tu home de usuario (la ruta `C:\Users\your_user` en lugar de `~`), y ahí crear la carpeta <b>.ssh</b>, posteriormente abre la terminal dentro de `.ssh` o entra en ella con un `cd`:
+
+### Directorio SSH Windows 10
+Si usás **Windows 10** nativamente debés ir a tu `home` de usuario (la ruta `~ = C:\Users\your_user`), y crear la carpeta <b>`.ssh`</b>, posteriormente entrar en ella con un `cd`:
 
 ```Powershell
 #Entrar a .ssh en Windows
@@ -53,7 +64,7 @@ cd C:\Users\your_user\.ssh
 
 ## Creación de la llave RSA
 
-Ejecuta el siguiente comando para generar una llave RSA:
+Ejecutá el siguiente comando para generar una llave RSA:
 
 ```bash
 ssh-keygen -N "passphrase"
@@ -211,25 +222,24 @@ Y el programa solicitará al usuario ingresar su passphrase para `my_key2`. En W
 
 ## Clonar un repositorio remoto
 
-Para bajar un repositorio remoto para **colaborar** se debe bajar utilizando la conexión **SSH**. Para ello en el repositorio remoto se debe hacer lo siguiente:
+Para bajar un repositorio remoto para **colaborar** se debe bajar utilizando protocolo **SSH**. Para ello en el repositorio remoto se debe hacer lo siguiente:
 
    1. En la ventana del repositorio, click en `code`
    2. Se depliega la ventana **Local**, entrar a la pestaña `SSH`
    3. Copiar en el portapapeles el link, ejemplo:
 
       ```bash
-      git@github.com:LINX-ICN-UNAM/nombre-del-repositorio.git
+      git clone git@github.com:LINX-ICN-UNAM/nombre-del-repositorio.git
       ```
 
 <img src="img/git_clone.gif" alt="Consola Remota Password" />
 
-Para poder clonar desde nuestra organización se debe usar la [llave y contraseña](GitHub.md#inciar-sesión-con-ssh)
- para **SSH** por lo que ya debe haber sido aprobada esa llave para utilizarla. Si aun no tienes aprobada tu llave o si desconoces del tema avisa a [Josué Rodríguez](https://github.com/alfjosue1997), [Fernando Caballero](https://github.com/Ferman333), o a [Addi Trejo](https://github.com/Additrejo).
+Para poder clonar desde nuestra organización se debe usar una [llave SSH](GitHub.md#inciar-sesión-con-ssh) asociada al dispositivo que hace el `git clone` por lo que ya debe haber sido aprobada esa llave por algun administrador para utilizarla. Si aun no tienes aprobada tu llave o si desconoces del tema avisa a [Josué Rodríguez](https://github.com/alfjosue1997), [Fernando Caballero](https://github.com/Ferman333), o a [Addi Trejo](https://github.com/Additrejo).
 
- Con el **link** utilizaras el comando `git clone` en la terminal, ya sea bash, wsl, git o powershell pero deberas cambiar `github.com` por el host que quieras utilizar, de lo contrario aparecerá un error. Eso es debido a que el Hostname ya no es `@github` sino que deberas usar alguno de los alias que usaste en el archivo *.ssh*, ejemplo:
+ Con `github.com:user/repo.git` utilizarás el comando `git clone` en la terminal, ya sea **bash**, **wsl**, **git** o **powershell** pero deberas cambiar `github.com` por el host que quieras utilizar, de lo contrario aparecerá un error. Eso es debido a que el **Hostname** ya no es `@github.com` sino que deberas usar alguno de los alias que usaste en el archivo *.ssh*, ejemplo:
 
 ```bash
-git@github-host1:LINX-ICN-UNAM/nombre-del-repositorio.git
+git clone git@github-host1:LINX-ICN-UNAM/nombre-del-repositorio.git
 ```
 
 <img src="img/git_clone_ssh1.jpg" alt="Consola Remota Password" />
@@ -238,16 +248,15 @@ Con el host que ingresen les pedira la contraseña de la llave SSH asociada. Asi
 
 <img src="img/git_clone_ssh2.jpg" alt="Consola Remota Password" />
 
-Para poder bajar un repositorio remoto pero **sin colaborar** con el se puede hacer lo siguiente en la consola:
+Para poder bajar un repositorio remoto utilizando el protocolo **HTTP**:
 
 ```Bash
 git clone https://github.com/TU-USUARIO/TU-REPO.git
 ```
 
-El problema es que no permitira subir archivos debido a que GitHub ya no permite usuario y contraseña en la conexión **HTTPS**.
+## Subir un repositorio remoto
 
-
-## Cargar un repositorio remoto
+Lo que se esta haciendo es copiar todo el proyecto a la nube, en este caso a Github. Ahí se almacena de manera privada, publica o compartida
 
 Para cargar un repositorio a GitHub varia un poco si empezaste desde `git init` o desde `git clone`
 
@@ -259,24 +268,24 @@ Se abre la carpeta oculta `.git` del repositorio local de tu proyecto (esta carp
 
 ```bash
 [remote "origin"]
-  url = github-host1:your_user/your_repo.git
+  url = github-host1:user/repo.git
   fetch = +refs/heads/*:refs/remotes/origin/*
 ```
 
-En la línea de `url` se debe cambiar el `github-host1` por el nombre que asignaste a tu Host en SSH, y `your_user/your_repo.git` es el nombre del usuario propietario en GitHub seguido del nombre del repositorio donde estás trabajando. 
+En la línea de `url` se debe cambiar el `github-host1` por el nombre que asignaste a tu Host en SSH, y `user/repo.git` es el nombre del usuario propietario en GitHub seguido del nombre del repositorio donde estás trabajando. 
 
 Tambien se puede hacer desde la terminal:
 
 ```bash
-git remote add origin github-host1:your_user/your_repo.git
+git remote add origin github-host1:user/repo.git
 ```
 
 Para comprobar:
 
 ```bash
 $ git remote -v
-> origin  git@github-host1:your_user/your_repo.git (fetch)
-> origin  git@github-host1:your_user/your_repo.git (push)
+> origin  git@github-host1:user/repo.git (fetch)
+> origin  git@github-host1:user/repo.git (push)
 ```
 
 Opcional: Renombrar la rama principal a 'main'
@@ -313,25 +322,52 @@ git push
 Si no funciono, probablemente tengas que configurar el repositorio remoto `origin`:
 
 ```bash
+git remote set-url <name> <newurl>
 git remote set-url origin git@github-host:usuario/nuevo-repo.git
 ```
+Es equivalente a usar `git branch`. La sintaxis básica es:
+```bash
+git branch (--set-upstream-to=<upstream>|-u <upstream>) [<branch-name>]
+```
+`<upstream>` considera que `<branch-name>` será el nombre de la rama. Sí `<branch-name>` no se especifica, then it defaults to the current branch.
+
+Ejemplos:
+```bash
+git branch --set-upstream-to=origin main
+git branch -u origin rama1
+```
+
+
 
 ## Ramas en Github
 
 Si quieres subir una nueva rama:
 
 ```bash
-git push -u origin nueva-rama
+git push -u origin <nueva-rama>
 ```
+
+> La `-u` no es necesaria sí ya has configurado `origin` y **Github**
+
 O borrar una nueva rama:
 
 ```bash
-git push origin --delete nombre-rama
+git push origin --delete <nombre-rama>
 ```
-Para poder revisar el estado de las ramas se puede utilizar `--prune` para purgar las ramas borradas del repositorio remoto y que no aparezcan al hacer `git status`
+
+Para poder revisar el estado de las ramas se puede utilizar `--prune` para purgar las ramas borradas del repositorio remoto y que no aparezcan al hacer `git status`.
+
 ```bash
 git fetch --prune
 ```
+
+Eso añade a `~/.gitconfig` las siguientes líneas:
+```txt
+[fetch]
+        prune = true
+```
+
+> `~ = /home/<user>` significa que es una configuración a nivel de ***usuario*** 
 
 Luego, para ver todas las ramas:
 ```bash
@@ -340,12 +376,23 @@ git branch -ar
 
 # Colaboración entre multiples personas
 
-# WorkFlow
+Al estar en una organización, debemos de trabajar en equipo y para que se pueda llevar un historial de cambios de un proyecto se debe de entender el flujo de trabajo y los comandos asociados
 
-# Fork
+## WorkFlow
 
+## Fork
+
+`Fork` es en Github el copiar todo un repositorio en tu cuenta. 
+
+Para poder contribuir con repositorios en Github lo mejor es seguir un esquema de *Issues* y *Pull Request* para poder llevar un orden en la contribución del proyecto, evaluar posibles errores o conflictos en el desarrollo, etc. 
+
+
+
+>No se recomienda *forkear* todos los repositorios de interes, puedes darle `⭐star` si quieres guardarlo
 
 ## Upstream
+
+
 
 Debes configurar un remoto que apunte al repositorio ascendente en Git para sincronizar los cambios que realizas en una bifurcación con el repositorio original. Esto también te permite sincronizar los cambios en el repositorio original con la bifurcación.
 
