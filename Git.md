@@ -154,7 +154,24 @@ Esta configuración afectará a nivel usuario en la pc en la que nos encontremos
 
     ![image](https://github.com/user-attachments/assets/1681ea38-b15a-4d77-8f1e-d80724ae99b6)
 
-    Con esto tendremos las configuraciones necesarias para usar GIT.
+  Una forma de comprobar las credenciales es agregando el comando:
+  ```bash  
+    git config --global --list
+    ```
+ <img width="466" height="106" alt="image" src="https://github.com/user-attachments/assets/69ff69d2-b36f-43c8-936e-bd9ed8c2b3ca" />
+
+Para guardar credenciales en git de forma local agregamos el siguiente comando:
+**Comando para linux**
+ ```bash  
+    git config --global credential.helper store
+  ```
+
+**Comando para windows**
+ ```bash  
+    git config --global credential.helper manager
+  ```
+
+Con esto tendremos las configuraciones necesarias para usar GIT.
 
 - **Editor VSCode**  *(recomendado)*
 
