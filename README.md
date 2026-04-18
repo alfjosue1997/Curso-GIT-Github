@@ -3,15 +3,6 @@
 Repositorio de aprendizaje sobre Git & Github. (*En constante desarrollo*)
 
 
-- [Git / GitHub](#git--github)
-- [Git](#git)
-- [GitHub](#github)
-- [Recursos](#recursos)
-- [Downloads](#downloads)
-
----
----
-
 # Git
 
 - [INDICE](Git.md#indice)
@@ -23,22 +14,12 @@ Repositorio de aprendizaje sobre Git & Github. (*En constante desarrollo*)
   - [*git --version*](Git.md#git---version)
   - [*git --help*](Git.md#git---help)
   - [Comandos básicos en la Terminal Linux, CMD, PowerShell, Git Bash.](Git.md#comandos-básicos-en-la-terminal-linux-cmd-powershell-git-bash)
-    - [💡 Recomendaciones](Git.md#-recomendaciones)
 - [Configuración de Git](Git.md#configuración-de-git)
   - [Configuración global.](Git.md#configuración-global)
   - [*git init*](Git.md#git-init)
   - [Ramas en Git](Git.md#ramas-en-git)
   - [Comandos basicos de Git](Git.md#comandos-basicos-de-git)
-    - [*git status*](Git.md#git-status)
-    - [*git add*](Git.md#git-add)
-    - [*git commit*](Git.md#git-commit)
-    - [*git log*](Git.md#git-log)
   - [Git alias](Git.md#git-alias)
-    - [📌 Crear un alias](Git.md#-crear-un-alias)
-    - [Ejemplos](Git.md#ejemplos)
-      - [**Basicos**](Git.md#basicos)
-      - [**Ejecutar comandos externos**](Git.md#ejecutar-comandos-externos)
-      - [**Otros Alias**](Git.md#otros-alias)
 
 # GitHub
 
@@ -52,12 +33,19 @@ Repositorio de aprendizaje sobre Git & Github. (*En constante desarrollo*)
   - [Agregar la llave pública a GitHub](GitHub.md#agregar-la-llave-pública-a-github)
   - [Inciar sesión con SSH](GitHub.md#inciar-sesión-con-ssh)
   - [Conectando más de un usuario por computadora (opcional)](GitHub.md#conectando-más-de-un-usuario-por-computadora-opcional)
-- [Enlace entre repositorios git y GitHub](GitHub.md#enlace-entre-repositorios-git-y-github)
+- [Enlace entre repositorios Git y GitHub](GitHub.md#enlace-entre-repositorios-git-y-github)
   - [Clonar un repositorio remoto](GitHub.md#clonar-un-repositorio-remoto)
-  - [Cargar un repositorio remoto](GitHub.md#cargar-un-repositorio-remoto)
-    - [Desde `init`](GitHub.md#desde-init)
-    - [Desde `clone`](GitHub.md#desde-clone)
-  - [Ramas](GitHub.md#ramas)
+  - [Subir un repositorio remoto](GitHub.md#subir-un-repositorio-remoto)
+  - [Ramas en Github](GitHub.md#ramas-en-github)
+- [Colaboración entre multiples personas](GitHub.md#colaboración-entre-multiples-personas)
+  - [WorkFlow](GitHub.md#workflow)
+  - [Fork](GitHub.md#fork)
+  - [Upstream](GitHub.md#upstream)
+
+# Anexos
+
+- [Archivos Largos: Git Large File Storage `git-LFS`](Anexos/Git_LFS.md#archivos-largos-git-large-file-storage-git-lfs)
+- [Git Submodules](Anexos/git-submodules.md#git-submodules)
 
 
 # Recursos

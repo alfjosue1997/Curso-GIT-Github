@@ -9,23 +9,12 @@
   - [*git --version*](#git---version)
   - [*git --help*](#git---help)
   - [Comandos básicos en la Terminal Linux, CMD, PowerShell, Git Bash.](#comandos-básicos-en-la-terminal-linux-cmd-powershell-git-bash)
-    - [💡 Recomendaciones](#-recomendaciones)
 - [Configuración de Git](#configuración-de-git)
   - [Configuración global.](#configuración-global)
   - [*git init*](#git-init)
   - [Ramas en Git](#ramas-en-git)
   - [Comandos basicos de Git](#comandos-basicos-de-git)
-    - [*git status*](#git-status)
-    - [*git add*](#git-add)
-    - [*git commit*](#git-commit)
-    - [*git log*](#git-log)
   - [Git alias](#git-alias)
-    - [📌 Crear un alias](#-crear-un-alias)
-    - [Ejemplos](#ejemplos)
-      - [**Basicos**](#basicos)
-      - [**Ejecutar comandos externos**](#ejecutar-comandos-externos)
-      - [**Otros Alias**](#otros-alias)
-
 
 
 # Instalacion Git
